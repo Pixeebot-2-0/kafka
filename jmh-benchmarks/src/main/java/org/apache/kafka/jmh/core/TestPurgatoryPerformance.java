@@ -16,6 +16,7 @@
  */
 package org.apache.kafka.jmh.core;
 
+import java.security.SecureRandom;
 import org.apache.kafka.server.purgatory.DelayedOperation;
 import org.apache.kafka.server.purgatory.DelayedOperationKey;
 import org.apache.kafka.server.purgatory.DelayedOperationPurgatory;
@@ -76,7 +77,7 @@ public class TestPurgatoryPerformance {
         CountDownLatch latch = new CountDownLatch(numRequests);
         long initialCpuTimeNano = getProcessCpuTimeNanos(osMXBean).orElseThrow();
         long start = System.currentTimeMillis();
-        Random rand = new Random();
+        Random rand = new SecureRandom();
         List<FakeOperationKey> keys = IntStream.range(0, numKeys)
                 .mapToObj(i -> new FakeOperationKey(format("fakeKey%d", rand.nextInt(numPossibleKeys))))
                 .collect(Collectors.toList());
@@ -273,7 +274,7 @@ public class TestPurgatoryPerformance {
      * sigma: the standard deviation of the underlying normal distribution (not the stdev of this log-normal distribution)
      */
     private static class LogNormalDistribution {
-        private final Random random = new Random();
+        private final Random random = new SecureRandom();
         private final double mu;
         private final double sigma;
 
@@ -295,7 +296,7 @@ public class TestPurgatoryPerformance {
      * model such a random variable.
      */
     private static class LatencySamples {
-        private final Random random = new Random();
+        private final Random random = new SecureRandom();
         private final List<Long> samples;
 
         public LatencySamples(int sampleSize, double pct75, double pct50) {
@@ -330,7 +331,7 @@ public class TestPurgatoryPerformance {
      * So, the internals are drawn from an exponential distribution.
      */
     private static class IntervalSamples {
-        private final Random random = new Random();
+        private final Random random = new SecureRandom();
         private final List<Long> samples;
 
         public IntervalSamples(int sampleSize, double requestPerSecond) {
@@ -363,7 +364,7 @@ public class TestPurgatoryPerformance {
      * lambda : the rate parameter of the exponential distribution
      */
     private static class ExponentialDistribution {
-        private final Random random = new Random();
+        private final Random random = new SecureRandom();
         private final double lambda;
 
         private ExponentialDistribution(double lambda) {

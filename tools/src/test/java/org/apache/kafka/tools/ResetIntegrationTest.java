@@ -16,6 +16,7 @@
  */
 package org.apache.kafka.tools;
 
+import java.nio.file.Files;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.network.SocketServerConfigs;
 import org.apache.kafka.streams.KafkaStreams;
@@ -237,7 +238,7 @@ public class ResetIntegrationTest extends AbstractResetIntegrationTest {
 
         // RESET
         final File resetFile = TestUtils.tempFile("reset", ".csv");
-        try (final BufferedWriter writer = new BufferedWriter(new FileWriter(resetFile))) {
+        try (final BufferedWriter writer = Files.newBufferedWriter(resetFile.toPath())) {
             writer.write(INPUT_TOPIC + ",0,1");
         }
 
@@ -279,7 +280,7 @@ public class ResetIntegrationTest extends AbstractResetIntegrationTest {
 
         // RESET
         final File resetFile = TestUtils.tempFile("reset", ".csv");
-        try (final BufferedWriter writer = new BufferedWriter(new FileWriter(resetFile))) {
+        try (final BufferedWriter writer = Files.newBufferedWriter(resetFile.toPath())) {
             writer.write(INPUT_TOPIC + ",0,1");
         }
 
@@ -326,7 +327,7 @@ public class ResetIntegrationTest extends AbstractResetIntegrationTest {
 
         // RESET
         final File resetFile = TestUtils.tempFile("reset", ".csv");
-        try (final BufferedWriter writer = new BufferedWriter(new FileWriter(resetFile))) {
+        try (final BufferedWriter writer = Files.newBufferedWriter(resetFile.toPath())) {
             writer.write(INPUT_TOPIC + ",0,1");
         }
 

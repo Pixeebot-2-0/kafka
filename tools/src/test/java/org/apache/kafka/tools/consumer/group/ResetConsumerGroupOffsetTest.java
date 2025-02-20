@@ -16,6 +16,7 @@
  */
 package org.apache.kafka.tools.consumer.group;
 
+import java.nio.file.Files;
 import org.apache.kafka.clients.admin.Admin;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.GroupProtocol;
@@ -773,7 +774,7 @@ public class ResetConsumerGroupOffsetTest {
     }
 
     private void writeContentToFile(File file, String content) throws IOException {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
+        try (BufferedWriter bw = Files.newBufferedWriter(file.toPath())) {
             bw.write(content);
         }
     }

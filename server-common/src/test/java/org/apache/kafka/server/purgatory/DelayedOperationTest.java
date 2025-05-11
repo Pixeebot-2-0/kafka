@@ -16,6 +16,7 @@
  */
 package org.apache.kafka.server.purgatory;
 
+import java.security.SecureRandom;
 import org.apache.kafka.common.utils.Time;
 
 import org.junit.jupiter.api.AfterEach;
@@ -49,7 +50,7 @@ public class DelayedOperationTest {
     private final MockKey test1 = new MockKey("test1");
     private final MockKey test2 = new MockKey("test2");
     private final MockKey test3 = new MockKey("test3");
-    private final Random random = new Random();
+    private final Random random = new SecureRandom();
     private DelayedOperationPurgatory<DelayedOperation> purgatory;
     private ScheduledExecutorService executorService;
 

@@ -16,6 +16,7 @@
  */
 package org.apache.kafka.tools;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.KafkaException;
 import org.apache.kafka.common.header.Header;
@@ -118,7 +119,7 @@ public class LineMessageReader implements RecordReader {
 
                     String line;
                     try {
-                        line = reader.readLine();
+                        line = BoundedLineReader.readLine(reader, 5_000_000);
                     } catch (IOException e) {
                         throw new KafkaException(e);
                     }
